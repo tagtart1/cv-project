@@ -1,0 +1,29 @@
+.section p {
+  margin-bottom: 10px;
+}
+
+.add-btn {
+  background-color: #b59fdf;
+  font-size: 14px;
+  outline: none;
+  border: 1px solid #b59fdf;
+  border-radius: 4px;
+  color: white;
+  margin-top: 10px;
+  height: 28px;
+  padding: 0 24px;
+  cursor: pointer;
+}
+
+.delete-btn {
+  background-color: #b59fdf;
+  font-size: 14px;
+  outline: none;
+  border: 1px solid #b59fdf;
+  border-radius: 4px;
+  color: white;
+  margin-top: 10px;
+  height: 28px;
+  padding: 0 24px;
+  cursor: pointer;
+}
