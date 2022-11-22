@@ -13,6 +13,7 @@
   height: 28px;
   padding: 0 24px;
   cursor: pointer;
+  display: inline-block;
 }
 
 .delete-btn {
@@ -26,4 +27,10 @@
   height: 28px;
   padding: 0 24px;
   cursor: pointer;
+}
+
+.section-items {
+  display: flex;
+  flex-direction: column;
+  gap: 36px;
 }

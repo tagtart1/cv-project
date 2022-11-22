@@ -17,6 +17,11 @@ input {
   padding: 10px 6px;
 }
 
+.button-group {
+  display: flex;
+  gap: 12px;
+}
+
 textarea {
   resize: none;
   font-size: 14px;

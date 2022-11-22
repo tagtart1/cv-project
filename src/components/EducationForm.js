@@ -1,6 +1,6 @@
 import React from "react";
 
-class WorkExperienceForm extends React.Component {
+class EducationForm extends React.Component {
   constructor(props) {
     super(props);
   }
@@ -10,19 +10,19 @@ class WorkExperienceForm extends React.Component {
       <div>
         <form>
           <input
-            value={this.props.company}
+            value={this.props.course}
             type="text"
-            name="company"
-            id="company"
-            placeholder="Company"
+            name="course"
+            id="course"
+            placeholder="Course / Program"
             onChange={(event) => this.props.inputChange(event, this.props.id)}
           ></input>
           <input
-            value={this.props.position}
+            value={this.props.university}
             type="text"
-            name="position"
-            id="position"
-            placeholder="Position"
+            name="university"
+            id="university"
+            placeholder="University"
             onChange={(event) => this.props.inputChange(event, this.props.id)}
           ></input>
           <input
@@ -68,4 +68,4 @@ class WorkExperienceForm extends React.Component {
   }
 }
 
-export default WorkExperienceForm;
+export default EducationForm;
