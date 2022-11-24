@@ -27,9 +27,14 @@ class PersonalInfoSection extends React.Component {
 
     personalInfoCopy[changedKey] = changedValue;
 
-    this.setState = {
-      personalInfo: personalInfoCopy,
-    };
+    this.setState(
+      {
+        personalInfo: personalInfoCopy,
+      },
+      () => {
+        this.props.sendInputs("personalInfo", this.state.personalInfo);
+      }
+    );
   }
 
   render() {

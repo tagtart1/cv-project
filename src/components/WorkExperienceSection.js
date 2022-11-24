@@ -8,7 +8,7 @@ class WorkExperienceSection extends React.Component {
     super(props);
 
     this.state = {
-      experiences: [],
+      experiences: [this.generateNewExperience(uniqid())],
     };
 
     this.onInputChange = this.onInputChange.bind(this);
@@ -35,6 +35,7 @@ class WorkExperienceSection extends React.Component {
     this.setState({
       experiences: experiencesCopy,
     });
+    this.props.sendInputs("workExperiences", this.state.experiences);
   }
 
   onNewExperienceForm() {
@@ -44,19 +45,22 @@ class WorkExperienceSection extends React.Component {
     this.setState({
       experiences: tempArray,
     });
+    this.props.sendInputs("workExperiences", this.state.experiences);
   }
 
   onDeleteForm(id) {
-    let tempArray = this.state.experiences;
-    tempArray = tempArray.filter((experience) => {
-      return experience.id !== id;
-    });
+    // Exact moment I found out that setState is async and can take a callback fucntions
 
-    this.setState({
-      experiences: tempArray,
-    });
-
-    console.log(this.state.experiences);
+    this.setState(
+      {
+        experiences: this.state.experiences.filter((experience) => {
+          return experience.id !== id;
+        }),
+      },
+      () => {
+        this.props.sendInputs("workExperiences", this.state.experiences);
+      }
+    );
   }
 
   onInputChange(e, id) {
@@ -78,7 +82,8 @@ class WorkExperienceSection extends React.Component {
         this.setState({
           experiences: experiencesCopy,
         });
-        console.log(this.state.experiences);
+        this.props.sendInputs("workExperiences", this.state.experiences);
+
         return;
       }
     }

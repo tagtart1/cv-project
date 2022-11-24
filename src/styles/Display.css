@@ -1,0 +1,31 @@
+.title-and-dates {
+  display: flex;
+  justify-content: space-between;
+}
+
+.info {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.section-header {
+  color: #9481b8;
+  font-size: 24px;
+  font-weight: 400;
+  margin: 0;
+  padding: 0;
+  margin-top: 16px;
+}
+
+.section-description {
+  font-size: 16px;
+  font-weight: 300;
+  line-height: 1.4;
+}
+
+.section-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}

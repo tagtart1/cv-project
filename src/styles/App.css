@@ -22,11 +22,12 @@ p {
   gap: 48px;
   justify-content: center;
   padding: 0px 54px;
+  position: relative;
 }
 
 .input-column {
   height: fit-content;
-  flex-grow: 1;
+  width: 210mm;
   background-color: white;
   border-radius: 8px;
   box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
@@ -39,9 +40,14 @@ p {
 }
 
 .output-column {
-  height: 500px;
-  flex-grow: 1;
+  min-height: 700px;
+  height: fit-content;
+  width: 200px;
+  width: 210mm;
   background-color: white;
   border-radius: 8px;
   box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+  position: sticky;
+  top: 1rem;
+  padding: 24px 36px;
 }

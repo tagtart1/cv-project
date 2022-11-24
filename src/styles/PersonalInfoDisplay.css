@@ -1,0 +1,50 @@
+.personal-info {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.name-and-title {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.name-and-title > p {
+  font-size: 36px;
+  color: #9481b8;
+  margin: 0;
+  padding: 0;
+}
+
+.name-and-title > p:last-child {
+  font-size: 24px;
+  color: black;
+  font-weight: 300;
+}
+
+.top-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.horizontal-line {
+  width: 100%;
+  background-color: #9481b8;
+  height: 4px;
+}
+
+.contacts-and-locations {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  font-weight: 300;
+}
+
+.description {
+  font-size: 16px;
+  font-weight: 300;
+  line-height: 1.6;
+}

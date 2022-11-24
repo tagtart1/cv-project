@@ -8,7 +8,7 @@ class EducationSection extends React.Component {
     super(props);
 
     this.state = {
-      educations: [],
+      educations: [this.generateNewEducation(uniqid())],
     };
 
     this.onInputChange = this.onInputChange.bind(this);
@@ -35,6 +35,7 @@ class EducationSection extends React.Component {
     this.setState({
       educations: educationsCopy,
     });
+    this.props.sendInputs("educations", this.state.educations);
   }
 
   onNewEducationForm() {
@@ -44,17 +45,20 @@ class EducationSection extends React.Component {
     this.setState({
       educations: tempArray,
     });
+    this.props.sendInputs("educations", this.state.educations);
   }
 
   onDeleteForm(id) {
-    let tempArray = this.state.educations;
-    tempArray = tempArray.filter((education) => {
-      return education.id !== id;
-    });
-
-    this.setState({
-      educations: tempArray,
-    });
+    this.setState(
+      {
+        educations: this.state.educations.filter((education) => {
+          return education.id !== id;
+        }),
+      },
+      () => {
+        this.props.sendInputs("educations", this.state.educations);
+      }
+    );
   }
 
   onInputChange(e, id) {
@@ -76,7 +80,7 @@ class EducationSection extends React.Component {
         this.setState({
           educations: educationsCopy,
         });
-
+        this.props.sendInputs("educations", this.state.educations);
         return;
       }
     }
