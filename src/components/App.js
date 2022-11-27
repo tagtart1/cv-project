@@ -6,6 +6,7 @@ import WorkExperienceSection from "./WorkExperienceSection";
 import EducationSection from "./EducationSection";
 import PersonalInfoDisplay from "./PersonalInfoDisplay";
 import WorkExperienceDisplay from "./WorkExperienceDisplay";
+import EducationDisplay from "./EducationDisplay";
 
 class App extends React.Component {
   constructor(props) {
@@ -46,6 +47,7 @@ class App extends React.Component {
             <WorkExperienceDisplay
               workExperiences={this.state.workExperiences}
             />
+            <EducationDisplay educations={this.state.educations} />
           </div>
         </div>
       </div>

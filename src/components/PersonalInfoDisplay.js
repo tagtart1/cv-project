@@ -1,5 +1,8 @@
 import React from "react";
 import "../styles/PersonalInfoDisplay.css";
+import callSvg from "../imgs/call.svg";
+import locationSvg from "../imgs/location.svg";
+import mailSvg from "../imgs/mail.svg";
 
 class PersonalInfoDisplay extends React.Component {
   constructor(props) {
@@ -19,9 +22,18 @@ class PersonalInfoDisplay extends React.Component {
           </div>
 
           <ul className="contacts-and-locations">
-            <li>{phone}</li>
-            <li>{email}</li>
-            <li>{location}</li>
+            <li>
+              <img src={callSvg} alt="Phone Number Icon" />
+              {phone}
+            </li>
+            <li>
+              <img src={mailSvg} alt="Email Icon" />
+              {email}
+            </li>
+            <li>
+              <img src={locationSvg} alt="My Location Icon" />
+              {location}
+            </li>
           </ul>
         </div>
         <div className="horizontal-line"></div>

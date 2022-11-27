@@ -16,8 +16,8 @@ class WorkExperienceDisplay extends React.Component {
               <div className="title-and-dates">
                 <p>{experience.position}</p>
                 <p>
-                  {experience.company} | {experience.startYear} -
-                  {experience.endYear}
+                  <span className="date-label">{experience.company} </span>|{" "}
+                  {experience.startYear} -{experience.endYear}
                 </p>
               </div>
               <div className="section-description">
