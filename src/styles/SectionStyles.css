@@ -1,5 +1,7 @@
 .section p {
   margin-bottom: 10px;
+  font-size: 24px;
+  color: rgb(55, 55, 55);
 }
 
 .add-btn {

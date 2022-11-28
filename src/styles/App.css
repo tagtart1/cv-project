@@ -35,12 +35,12 @@ p {
 
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  gap: 28px;
   margin-bottom: 24px;
 }
 
 .output-column {
-  min-height: 700px;
+  min-height: 900px;
   height: fit-content;
   width: 200px;
   width: 210mm;

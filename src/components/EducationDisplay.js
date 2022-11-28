@@ -17,7 +17,7 @@ class EducationDisplay extends React.Component {
                 <p>{education.course}</p>
                 <p>
                   <span className="date-label">{education.university} </span>|{" "}
-                  {education.startYear} -{education.endYear}
+                  {education.startYear} - {education.endYear}
                 </p>
               </div>
               <div className="section-description">{education.description}</div>
