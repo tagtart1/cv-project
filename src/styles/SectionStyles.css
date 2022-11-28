@@ -16,7 +16,8 @@
   display: inline-block;
 }
 
-.delete-btn {
+.delete-btn,
+.reset-button {
   background-color: #b59fdf;
   font-size: 14px;
   outline: none;

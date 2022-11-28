@@ -22,14 +22,9 @@ class App extends React.Component {
   }
 
   getFormInputs(propertyName, value) {
-    this.setState(
-      {
-        [propertyName]: value,
-      },
-      () => {
-        console.log(this.state);
-      }
-    );
+    this.setState({
+      [propertyName]: value,
+    });
   }
 
   render() {

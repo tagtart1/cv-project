@@ -8,12 +8,24 @@ class WorkExperienceSection extends React.Component {
     super(props);
 
     this.state = {
-      experiences: [this.generateNewExperience(uniqid())],
+      experiences: [
+        {
+          company: "Tesla",
+          position: "Front End Developer",
+          startYear: "2012",
+          endYear: "2014",
+          description:
+            "I did some things doing this. I did this thing also. I also did that one that handles this many request while maintaining this high speeds. I was super good at the job and yea",
+          id: uniqid(),
+        },
+      ],
     };
 
     this.onInputChange = this.onInputChange.bind(this);
     this.onDeleteForm = this.onDeleteForm.bind(this);
     this.onNewExperienceForm = this.onNewExperienceForm.bind(this);
+    this.onResetForm = this.onResetForm.bind(this);
+    this.props.sendInputs("workExperiences", this.state.experiences);
   }
 
   generateNewExperience(id) {
@@ -56,6 +68,24 @@ class WorkExperienceSection extends React.Component {
         experiences: this.state.experiences.filter((experience) => {
           return experience.id !== id;
         }),
+      },
+      () => {
+        this.props.sendInputs("workExperiences", this.state.experiences);
+      }
+    );
+  }
+
+  onResetForm(id) {
+    const experiencesCopy = this.state.experiences;
+    experiencesCopy.forEach((experience, i) => {
+      if (experience.id === id) {
+        experiencesCopy[i] = this.generateNewExperience(id);
+      }
+    });
+
+    this.setState(
+      {
+        experiences: experiencesCopy,
       },
       () => {
         this.props.sendInputs("workExperiences", this.state.experiences);
@@ -111,6 +141,7 @@ class WorkExperienceSection extends React.Component {
                   endYear={experience.endYear}
                   description={experience.description}
                   id={experience.id}
+                  resetForm={this.onResetForm}
                   lastItem={true}
                   addForm={this.onNewExperienceForm}
                 />
@@ -127,6 +158,7 @@ class WorkExperienceSection extends React.Component {
                   endYear={experience.endYear}
                   description={experience.description}
                   id={experience.id}
+                  resetForm={this.onResetForm}
                   lastItem={false}
                 />
               );

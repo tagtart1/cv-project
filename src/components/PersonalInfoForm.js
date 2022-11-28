@@ -4,13 +4,21 @@ import "../styles/FormStandard.css";
 class PersonalInfoForm extends React.Component {
   constructor(props) {
     super(props);
+
+    this.resetForm = this.resetForm.bind(this);
+  }
+
+  resetForm() {
+    document.getElementById("personal-info-form").reset();
+    this.props.resetForm();
   }
 
   render() {
     return (
       <div>
-        <form>
+        <form id="personal-info-form">
           <input
+            value={this.props.personalInfo.name}
             type="text"
             name="name"
             id="name"
@@ -19,6 +27,7 @@ class PersonalInfoForm extends React.Component {
           ></input>
 
           <input
+            value={this.props.personalInfo.title}
             type="text"
             name="title"
             id="title"
@@ -27,6 +36,7 @@ class PersonalInfoForm extends React.Component {
           ></input>
 
           <input
+            value={this.props.personalInfo.phone}
             type="tel"
             name="phone"
             id="phone"
@@ -35,6 +45,7 @@ class PersonalInfoForm extends React.Component {
           ></input>
 
           <input
+            value={this.props.personalInfo.email}
             type="email"
             name="email"
             id="email"
@@ -43,6 +54,7 @@ class PersonalInfoForm extends React.Component {
           ></input>
 
           <input
+            value={this.props.personalInfo.location}
             type="text"
             name="location"
             id="location"
@@ -51,6 +63,7 @@ class PersonalInfoForm extends React.Component {
           ></input>
 
           <textarea
+            value={this.props.personalInfo.description}
             name="description"
             rows="5"
             cols="10"
@@ -59,6 +72,9 @@ class PersonalInfoForm extends React.Component {
             onChange={this.props.inputChange}
           ></textarea>
         </form>
+        <button className="reset-button" onClick={this.resetForm}>
+          Reset
+        </button>
       </div>
     );
   }

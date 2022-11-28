@@ -12,7 +12,7 @@ class WorkExperienceDisplay extends React.Component {
         <h1 className="section-header">WORK EXPERIENCE</h1>
         {this.props.workExperiences.map((experience) => {
           return (
-            <div className="info">
+            <div className="info" key={experience.id}>
               <div className="title-and-dates">
                 <p>{experience.position}</p>
                 <p>

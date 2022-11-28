@@ -8,7 +8,7 @@ class WorkExperienceForm extends React.Component {
   render() {
     return (
       <div>
-        <form>
+        <form id={this.props.id}>
           <input
             value={this.props.company}
             type="text"
@@ -51,6 +51,12 @@ class WorkExperienceForm extends React.Component {
           ></input>
         </form>
         <div className="button-group">
+          <button
+            className="reset-button"
+            onClick={() => this.props.resetForm(this.props.id)}
+          >
+            Reset
+          </button>
           <button
             className="delete-btn"
             onClick={() => this.props.deleteForm(this.props.id)}

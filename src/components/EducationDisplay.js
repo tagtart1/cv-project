@@ -12,7 +12,7 @@ class EducationDisplay extends React.Component {
         <h1 className="section-header">EDUCATION</h1>
         {this.props.educations.map((education) => {
           return (
-            <div className="info">
+            <div className="info" key={education.id}>
               <div className="title-and-dates">
                 <p>{education.course}</p>
                 <p>

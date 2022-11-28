@@ -8,12 +8,32 @@ class EducationSection extends React.Component {
     super(props);
 
     this.state = {
-      educations: [this.generateNewEducation(uniqid())],
+      educations: [
+        {
+          course: "Level Million Programming",
+          university: "Harvard",
+          startYear: "2025",
+          endYear: "2027",
+          description: "",
+          id: uniqid(),
+        },
+        {
+          course: "Weapons of Coding",
+          university: "Random School",
+          startYear: "2028",
+          endYear: "2030",
+          description:
+            "This is a random description that you can add to further explain a block of education",
+          id: uniqid(),
+        },
+      ],
     };
 
     this.onInputChange = this.onInputChange.bind(this);
     this.onDeleteForm = this.onDeleteForm.bind(this);
     this.onNewEducationForm = this.onNewEducationForm.bind(this);
+    this.onResetForm = this.onResetForm.bind(this);
+    this.props.sendInputs("educations", this.state.educations);
   }
 
   generateNewEducation(id) {
@@ -25,6 +45,25 @@ class EducationSection extends React.Component {
       description: "",
       id: id,
     };
+  }
+
+  onResetForm(id) {
+    const educationsCopy = this.state.educations;
+    educationsCopy.forEach((education, i) => {
+      if (education.id === id) {
+        educationsCopy[i] = this.generateNewEducation(id);
+      }
+    });
+
+    this.setState(
+      {
+        educations: educationsCopy,
+      },
+      () => {
+        this.props.sendInputs("educations", this.state.educations);
+        console.log(this.state.educations);
+      }
+    );
   }
 
   handleNewEducation(education, key, value) {
@@ -102,12 +141,13 @@ class EducationSection extends React.Component {
                   inputChange={this.onInputChange}
                   deleteForm={this.onDeleteForm}
                   key={education.id}
-                  company={education.company}
-                  position={education.position}
+                  course={education.course}
+                  university={education.university}
                   startYear={education.startYear}
                   endYear={education.endYear}
                   description={education.description}
                   id={education.id}
+                  resetForm={this.onResetForm}
                   lastItem={true}
                   addForm={this.onNewEducationForm}
                 />
@@ -118,12 +158,13 @@ class EducationSection extends React.Component {
                   inputChange={this.onInputChange}
                   deleteForm={this.onDeleteForm}
                   key={education.id}
-                  company={education.company}
-                  position={education.position}
+                  course={education.course}
+                  university={education.university}
                   startYear={education.startYear}
                   endYear={education.endYear}
                   description={education.description}
                   id={education.id}
+                  resetForm={this.onResetForm}
                   lastItem={false}
                 />
               );
