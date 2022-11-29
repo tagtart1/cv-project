@@ -2,33 +2,28 @@ import React from "react";
 import WorkExperienceForm from "./WorkExperienceForm";
 import "../styles/SectionStyles.css";
 import uniqid from "uniqid";
+import { useEffect, useState } from "react";
 
-class WorkExperienceSection extends React.Component {
-  constructor(props) {
-    super(props);
+const WorkExperienceSection = (props) => {
+  const [experiences, setExperiences] = useState([
+    {
+      company: "Tesla",
+      position: "Front End Developer",
+      startYear: "2012",
+      endYear: "2014",
+      description:
+        "I did some things doing this. I did this thing also. I also did that one that handles this many request while maintaining this high speeds. I was super good at the job and yea",
+      id: uniqid(),
+    },
+  ]);
 
-    this.state = {
-      experiences: [
-        {
-          company: "Tesla",
-          position: "Front End Developer",
-          startYear: "2012",
-          endYear: "2014",
-          description:
-            "I did some things doing this. I did this thing also. I also did that one that handles this many request while maintaining this high speeds. I was super good at the job and yea",
-          id: uniqid(),
-        },
-      ],
-    };
+  const { sendInputs } = props;
 
-    this.onInputChange = this.onInputChange.bind(this);
-    this.onDeleteForm = this.onDeleteForm.bind(this);
-    this.onNewExperienceForm = this.onNewExperienceForm.bind(this);
-    this.onResetForm = this.onResetForm.bind(this);
-    this.props.sendInputs("workExperiences", this.state.experiences);
-  }
+  useEffect(() => {
+    sendInputs("workExperiences", experiences);
+  }, [experiences, sendInputs]);
 
-  generateNewExperience(id) {
+  const generateNewExperience = (id) => {
     return {
       company: "",
       position: "",
@@ -37,146 +32,111 @@ class WorkExperienceSection extends React.Component {
       description: "",
       id: id,
     };
-  }
-
-  handleNewExperience(experience, key, value) {
-    const experiencesCopy = this.state.experiences;
-
+  };
+  const handleNewExperience = (experience, key, value) => {
+    const experiencesCopy = [...experiences];
     experience[key] = value;
     experiencesCopy.push(experience);
-    this.setState({
-      experiences: experiencesCopy,
-    });
-    this.props.sendInputs("workExperiences", this.state.experiences);
-  }
-
-  onNewExperienceForm() {
-    const newExperience = this.generateNewExperience(uniqid());
-    const tempArray = this.state.experiences;
+    setExperiences(experiencesCopy);
+  };
+  const onNewExperienceForm = () => {
+    const newExperience = generateNewExperience(uniqid());
+    const tempArray = [...experiences];
     tempArray.push(newExperience);
-    this.setState({
-      experiences: tempArray,
+    setExperiences(tempArray);
+  };
+  const onDeleteForm = (id) => {
+    let experiencesCopy = [...experiences];
+
+    experiencesCopy = experiencesCopy.filter((experience) => {
+      return experience.id !== id;
     });
-    this.props.sendInputs("workExperiences", this.state.experiences);
-  }
 
-  onDeleteForm(id) {
-    // Exact moment I found out that setState is async and can take a callback fucntions
+    setExperiences(experiencesCopy);
+  };
 
-    this.setState(
-      {
-        experiences: this.state.experiences.filter((experience) => {
-          return experience.id !== id;
-        }),
-      },
-      () => {
-        this.props.sendInputs("workExperiences", this.state.experiences);
-      }
-    );
-  }
-
-  onResetForm(id) {
-    const experiencesCopy = this.state.experiences;
+  const onResetForm = (id) => {
+    const experiencesCopy = [...experiences];
     experiencesCopy.forEach((experience, i) => {
       if (experience.id === id) {
-        experiencesCopy[i] = this.generateNewExperience(id);
+        experiencesCopy[i] = generateNewExperience(id);
       }
     });
+    setExperiences(experiencesCopy);
+  };
 
-    this.setState(
-      {
-        experiences: experiencesCopy,
-      },
-      () => {
-        this.props.sendInputs("workExperiences", this.state.experiences);
-      }
-    );
-  }
-
-  onInputChange(e, id) {
-    const experiencesCopy = this.state.experiences;
+  const onInputChange = (e, id) => {
+    const experiencesCopy = [...experiences];
     const changedKey = e.target.name;
     const changedValue = e.target.value;
-
     // If the experience array state is empty, start off with a new one and modify it
     if (experiencesCopy.length === 0) {
-      let newExperience = this.generateNewExperience(id);
-      this.handleNewExperience(newExperience, changedKey, changedValue);
+      let newExperience = generateNewExperience(id);
+      handleNewExperience(newExperience, changedKey, changedValue);
       return;
     }
-
     // Check to see if ID is in array and modify existing expereince
     for (let i = 0; i < experiencesCopy.length; i++) {
       if (experiencesCopy[i].id === id) {
         experiencesCopy[i][changedKey] = changedValue;
-        this.setState({
-          experiences: experiencesCopy,
-        });
-        this.props.sendInputs("workExperiences", this.state.experiences);
-
+        setExperiences(experiencesCopy);
         return;
       }
     }
     // ID not in experience array therefore create a new
-    let newExperience = this.generateNewExperience(id);
-    this.handleNewExperience(newExperience, changedKey, changedValue);
-  }
+    let newExperience = generateNewExperience(id);
+    handleNewExperience(newExperience, changedKey, changedValue);
+  };
 
-  render() {
-    return (
-      <div className="section">
-        <p>Work Experience</p>
-        <div className="section-items">
-          {this.state.experiences.map((experience, i, arr) => {
-            // Makes the Add Button stick to the last fornm
-            if (arr.length - 1 === i) {
-              return (
-                <WorkExperienceForm
-                  inputChange={this.onInputChange}
-                  deleteForm={this.onDeleteForm}
-                  key={experience.id}
-                  company={experience.company}
-                  position={experience.position}
-                  startYear={experience.startYear}
-                  endYear={experience.endYear}
-                  description={experience.description}
-                  id={experience.id}
-                  resetForm={this.onResetForm}
-                  lastItem={true}
-                  addForm={this.onNewExperienceForm}
-                />
-              );
-            } else
-              return (
-                <WorkExperienceForm
-                  inputChange={this.onInputChange}
-                  deleteForm={this.onDeleteForm}
-                  key={experience.id}
-                  company={experience.company}
-                  position={experience.position}
-                  startYear={experience.startYear}
-                  endYear={experience.endYear}
-                  description={experience.description}
-                  id={experience.id}
-                  resetForm={this.onResetForm}
-                  lastItem={false}
-                />
-              );
-          })}
-        </div>
-
-        {this.state.experiences.length < 1 ? (
-          // If experiences is empty then just add an add button here
-          <button
-            className="add-btn"
-            onClick={() => this.onNewExperienceForm()}
-          >
-            Add
-          </button>
-        ) : null}
+  return (
+    <div className="section">
+      <p>Work Experience</p>
+      <div className="section-items">
+        {experiences.map((experience, i, arr) => {
+          // Makes the Add Button stick to the last fornm
+          if (arr.length - 1 === i) {
+            return (
+              <WorkExperienceForm
+                inputChange={onInputChange}
+                deleteForm={onDeleteForm}
+                key={experience.id}
+                company={experience.company}
+                position={experience.position}
+                startYear={experience.startYear}
+                endYear={experience.endYear}
+                description={experience.description}
+                id={experience.id}
+                resetForm={onResetForm}
+                lastItem={true}
+                addForm={onNewExperienceForm}
+              />
+            );
+          } else
+            return (
+              <WorkExperienceForm
+                inputChange={onInputChange}
+                deleteForm={onDeleteForm}
+                key={experience.id}
+                company={experience.company}
+                position={experience.position}
+                startYear={experience.startYear}
+                endYear={experience.endYear}
+                description={experience.description}
+                id={experience.id}
+                resetForm={onResetForm}
+                lastItem={false}
+              />
+            );
+        })}
       </div>
-    );
-  }
-}
+      {experiences.length < 1 ? (
+        // If experiences is empty then just add an add button here
+        <button className="add-btn" onClick={() => onNewExperienceForm()}>
+          Add
+        </button>
+      ) : null}
+    </div>
+  );
+};
 
 export default WorkExperienceSection;
